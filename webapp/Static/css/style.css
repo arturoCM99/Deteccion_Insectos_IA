@@ -1,0 +1,662 @@
+/*ENTRENAMIENTO*/
+/* General form styling */
+.form-group {
+    margin-bottom: 10px; /* Espacio entre grupos de formulario */
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el campo de formulario */
+    color: #5a6772; /* Color acorde al diseño general */
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #6C63FF;
+    border-radius: 5px;
+    box-sizing: border-box; /* Esto incluye padding y bordes en el ancho total */
+}
+
+.form-group input[type=range] {
+    -webkit-appearance: none; /* Elimina el estilo por defecto en navegadores Chrome, Edge y Safari */
+    appearance: none;
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
+    height: 12px; /* Puedes ajustar esto según lo grueso que quieras que sea el slider */
+    border-radius: 5px; /* Bordes redondeados */
+    background: #eaeff2; /* Color de fondo del slider */
+    outline: none;
+}
+
+/* Estilo para el pulgar del control deslizante */
+.form-group input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Elimina el estilo por defecto en navegadores Chrome, Edge y Safari */
+    appearance: none;
+    width: 10px; /* Reducir el tamaño del thumb */
+    height: 10px; /* Reducir el tamaño del thumb para que coincida con el track */
+    background: #6C63FF;
+    cursor: pointer;
+    border-radius: 50%; /* Mantiene el thumb redondo */
+    margin-top: 0px; /* Ajustar para alinear con el track si es necesario */
+}
+
+.form-group input[type=range]::-moz-range-thumb {
+    width: 18px; /* Reducir el tamaño del thumb */
+    height: 18px; /* Reducir el tamaño del thumb para que coincida con el track */
+    background: #6C63FF;
+    cursor: pointer;
+    border-radius: 50%; /* Mantiene el thumb redondo */
+}
+
+/* Estilo para el track del control deslizante */
+.form-group input[type=range]::-webkit-slider-runnable-track,
+.form-group input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 12px;
+    background: #ddd;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Estilos para el select y los input[type=number] cuando están enfocados */
+.form-group input[type=range]:focus,
+.form-group input[type=range]:hover {
+    opacity: 1; /* Opacidad completa cuando se enfoca o se pasa el ratón por encima */
+}
+.form-group input[type=number]:focus {
+    border-color: #48B1BF;
+    outline: none; /* Eliminar el contorno por defecto al enfocar */
+    box-shadow: 0 0 0 2px rgba(72, 177, 191, 0.5); /* Sombra exterior para destacar el enfoque */
+}
+
+
+@media (max-width: 768px) {
+    .form-group input,
+    .form-group select {
+        width: calc(100% - 10px); /* Tamaño ajustado para pantallas más pequeñas */
+        /* Resto de estilos */
+    }
+    /* Ajustes adicionales para pantallas pequeñas */
+}
+
+/*INDEX*/
+
+/* Añade estilos adicionales aquí si es necesario */
+
+.btn-block {
+    display: block;
+    width: calc(100% - 40px); /* Restar el doble del padding establecido para el contenedor */
+    margin: 10px auto; /* Centrar el botón si es necesario */
+}
+
+/* Se puede reutilizar la clase button[type=submit] para botones genéricos */
+.btn-primary, .btn-secondary {
+     padding: 10px 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #fff;
+    background: #6C63FF; /* Color principal para botón primario */
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, .4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-align: center;
+    margin: 10px 0; /* Añade espacio entre los botones */
+}
+
+.btn-secondary {
+    background: #48B1BF; /* Color secundario para botón secundario */
+}
+
+/* Hover efects for buttons */
+.btn-primary:hover, .btn-secondary:hover {
+    box-shadow: 0 6px 22px rgba(108, 99, 255, .65);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active, .btn-secondary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 20px rgba(108, 99, 255, .23);
+}
+
+/* Estilos para cuando la pantalla es pequeña */
+@media (max-width: 768px) {
+    .container {
+        padding: 5px;
+        padding-bottom: 50px; /* Ajusta este valor si es necesario */
+    }
+
+    /* Ajusta el tamaño y el espaciado de los elementos del formulario para pantallas pequeñas */
+    .form-group input,
+    .form-group select {
+        /* Resto de estilos */
+    }
+}
+
+
+
+/*HEADER*/
+.top-section {
+    padding: 1rem 0; /* Espaciado vertical ajustado */
+    background: linear-gradient(to right, #6C63FF, #828DF8); /* Gradiente con colores de marca */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada para dar sensación de elevación */
+}
+
+.top-section header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%; /* Espacio horizontal más generoso */
+    margin: 0 auto; /* Centrado */
+    max-width: 1200px; /* Ancho máximo del contenido del encabezado */
+}
+
+.top-section header h1 {
+    font-size: 3.5rem; /* Tamaño de fuente más grande */
+    color: #ffffff; /* Texto en blanco para contraste */
+    margin: 0;
+    font-weight: 700; /* Peso de la fuente más grueso */
+    text-transform: uppercase; /* Todas las letras en mayúsculas para más presencia */
+    letter-spacing: 1px; /* Espacio entre caracteres para una mejor legibilidad */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+}
+
+.top-section header h1:hover {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Sombra de texto al pasar el ratón */
+}
+
+.top-section header img {
+    max-width: 150px; /* Tamaño más grande para el logo */
+    transition: transform 0.3s ease; /* Transición suave para el efecto de hover */
+}
+
+.top-section header img:hover {
+    transform: scale(1.1); /* Efecto de crecimiento al pasar el ratón */
+}
+
+/* Estilo para una posible barra de navegación si decides añadirla */
+.navbar {
+    display: flex;
+    justify-content: center; /* Centrado de los elementos de la barra de navegación */
+    list-style: none; /* Quitar estilos de lista por defecto */
+    padding-left: 0; /* Quitar el padding por defecto de la lista */
+}
+
+.navbar li {
+    margin: 0 1rem; /* Espaciado horizontal entre elementos de la barra de navegación */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #ffffff; /* Enlaces en blanco para que contrasten con el fondo */
+    font-weight: 500; /* Peso de fuente medio */
+    transition: color 0.3s ease; /* Transición suave de color al pasar el ratón */
+}
+
+.navbar a:hover {
+    color: #dcdcff; /* Cambio de color al pasar el ratón por encima */
+}
+
+
+.titulo-subir-archivos {
+    font-size: 4rem; /* Aumenta el tamaño para más impacto */
+    color: #6C63FF; /* Un color que hace juego con el esquema de color del encabezado */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de texto para mejorar contraste */
+     margin: 0;
+    font-weight: 700; /* Hace el texto más audaz */
+    line-height: 1.2; /* Ajusta el interlineado para un mejor aspecto visual */
+    letter-spacing: -1px; /* Ajusta el espaciado entre caracteres para una mejor legibilidad */
+}
+
+
+/*BODY*/
+body {
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 10px auto; 
+    padding: 10px;
+    padding-bottom: 80px; /* Ajusta este valor para dar espacio al footer */
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+
+/*PIE DE PAGINA*/
+.bottom-section {
+    background-color: #fff;
+    padding: 5px 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    text-align: center;
+}
+
+footer {
+    background: #eaeff2; /* Fondo claro con un tono azulado */
+    color: #5a6772; /* Texto en un tono de gris azulado para una estética suave */
+    padding: 25px 0; /* Relleno superior e inferior un poco más generoso */
+    font-family: 'Open Sans', sans-serif; /* Fuente moderna y limpia */
+    display: flex;
+    justify-content: center; /* Centrado de contenido */
+    align-items: center; /* Alineación vertical */
+    font-size: 1rem; /* Tamaño de fuente consistente */
+    border-top: 5px solid #6C63FF; /* Borde superior más grueso para un toque moderno */
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.05); /* Sombra superior suave */
+    position: relative; /* Posición relativa para permitir efectos de capa */
+}
+
+footer p {
+    margin: 0; /* Eliminar cualquier margen predeterminado */
+    font-style: italic; /* Mantener el estilo cursivo */
+    text-align: center; /* Asegurar alineación de texto centrada */
+    padding: 0 20px; /* Relleno lateral para el texto */
+    transition: color 0.3s ease; /* Transición suave de color */
+}
+
+footer p:hover {
+    color: #6C63FF; /* Cambiar el color del texto al pasar el mouse para interactividad */
+}
+
+footer::after {
+    content: '';
+    position: absolute;
+    bottom: 10px; /* Posicionamiento justo por encima del fondo del footer */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #6C63FF, #8884FF, #6C63FF); /* Gradiente actualizado */
+    opacity: 0.7;
+    transition: opacity 0.3s ease; /* Transición suave para la opacidad */
+}
+
+
+footer:hover::after {
+    opacity: 1; /* Aumentar la opacidad al pasar el mouse para un efecto destacado */
+}
+
+/* Estilo para el contenido del footer cuando la pantalla es más pequeña */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column; /* Cambiar a disposición de columna en pantallas más pequeñas */
+        padding: 25px; /* Aumentar el relleno para mejor visualización en dispositivos móviles */
+    }
+
+    footer p {
+        padding: 0 10px; /* Ajustar el relleno lateral para evitar que el texto toque los bordes */
+    }
+}
+
+
+
+
+/*BOTON*/
+button[type=submit] {
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #fff;
+    background: #6C63FF;
+    background: -webkit-linear-gradient(to right, #6C63FF, #48B1BF);
+    background: linear-gradient(to right, #6C63FF, #48B1BF);
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, .4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button[type=submit]:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.4);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.3s ease-out;
+    z-index: 0;
+}
+
+button[type=submit]:hover:before {
+    top: -90%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-50%) scaleY(1.3) scaleX(1.8);
+}
+
+button[type=submit]:hover {
+    box-shadow: 0 6px 22px rgba(108, 99, 255, .65);
+    transform: translateY(-2px);
+}
+
+button[type=submit]:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 20px rgba(108, 99, 255, .23);
+}
+
+#model-select {
+    font-family: 'Helvetica', sans-serif;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #6C63FF;
+    background-color: #e8e8e8;
+    color: #5a5a5a;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    appearance: none; /* Desactiva el estilo por defecto en algunos navegadores */
+    -webkit-appearance: none; /* Desactiva el estilo por defecto en navegadores WebKit */
+    margin: 10px 0; /* Añade algo de margen en la parte superior e inferior */
+}
+#model-upload-area {
+    display: none;
+}
+
+/* Flecha personalizada para el select */
+#model-select {
+    position: relative;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%236C63FF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    padding-right: 30px; /* Hace espacio para la imagen de flecha */
+}
+
+/* Al pasar el ratón por encima del select, cambia el color de fondo y la flecha */
+#model-select:hover {
+    background-color: #f0f0f0;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%2348B1BF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+}
+
+/* Estilo para cuando el select está enfocado */
+#model-select:focus {
+    outline: none;
+    border-color: #48B1BF;
+    box-shadow: 0 0 0 2px rgba(72, 177, 191, 0.5);
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    #model-select {
+        /* Estilos ajustados para dispositivos móviles si es necesario */
+    }
+}
+
+
+/*AREAS DE SUBIDA DE ARCHIVOS*/
+.upload-area {
+    font-family: 'Helvetica', sans-serif;
+    border: 2px dashed #6C63FF;
+    border-radius: 10px;
+    width: 300px;
+    height: 100px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e8e8e8;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview-container {
+    display: flex;
+    flex-direction: row; /* Cambia de column a row */
+    align-items: center; /* Centra los elementos verticalmente */
+    justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
+    gap: 10px; /* Espacio entre la etiqueta y la imagen */
+}
+
+.image-preview-container img {
+    max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
+    max-height: 100%; /* Asegura que la imagen no sobrepase la altura del contenedor */
+    object-fit: contain; /* La imagen se ajustará dentro del área disponible, manteniendo su proporción */
+    border-radius: 5px; /* Si deseas bordes redondeados */
+}
+
+
+.upload-area:hover {
+    background-color: #f0f0f0;
+    border-color: #48B1BF;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1), 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.titulo-html {
+    display: flex;
+    align-items: center; /* Asegura que la imagen y el título estén alineados verticalmente */
+    gap: 10px; /* Añade un espacio entre la imagen y el título */
+}
+
+
+.upload-area label {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-prompt {
+    color: #6C63FF;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.file-prompt:hover {
+    color: #48B1BF;
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.upload-area input[type=file] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: copy;
+}
+
+/* Custom styling for file name text */
+.file-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    width: 100%;
+    text-align: center;
+}
+
+/* Animation to indicate an active drop area when dragging files over */
+@keyframes pulseBorder {
+    from {
+        box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.4);
+    }
+    to {
+        box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
+    }
+}
+
+.upload-area.dragover {
+    animation: pulseBorder 1s infinite alternate;
+    background-color: #d8d8d8;
+    /* Cambiar el color del borde al arrastrar archivos sobre el área */
+    border-color: #6C63FF;
+    /* Escalar ligeramente para un efecto interactivo */
+    transform: scale(1.02);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent; /* Change the background to transparent if needed */
+    color: #ff6666; /* Choose your preferred color */
+    border: none;
+    font-size: 20px; /* Adjust the size as needed */
+    cursor: pointer;
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+/* Establece la posición relativa en el contenedor para que el botón de cierre pueda posicionarse correctamente */
+.model-name-container {
+    position: relative;
+    padding-top: 20px; /* Ajusta según sea necesario para el diseño */
+}
+
+/* Incrementa la especificidad para asegurarte de que estos estilos tengan prioridad */
+div.model-name-container > .close-btn {
+    position: absolute;
+    top: 0; /* Ajusta según sea necesario */
+    right: 0; /* Ajusta según sea necesario */
+    background: none; /* Transparente para que solo se vea la 'X' */
+    border: none;
+    color: #ff6666; /* El color que prefieras para la 'X' */
+    cursor: pointer;
+    font-size: 1.5rem; /* Aumenta el tamaño si es necesario */
+    z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+
+.model-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 30px; /* espacio para el botón de cierre */
+}
+
+/* Añade esto a tu archivo CSS */
+.model-name-container .file-name {
+    text-decoration: underline; /* Esto subrayará el nombre del archivo */
+}
+
+
+/* Optional: style to improve the close button appearance */
+.close-btn:hover {
+    background: transparent; /* Maintain the transparent background on hover */
+    color: #d33; /* Darken the color on hover for effect */
+}
+
+.training-container {
+    display: flex;
+    justify-content: space-between; /* Esto alinea los elementos a ambos extremos del contenedor */
+    align-items: flex-start; /* Alinea los elementos al inicio de su contenedor en dirección vertical */
+    padding: 20px; /* Espacio alrededor del contenido */
+}
+
+.training-status, .training-data {
+    flex: 1; /* Esto hace que ambos divs ocupen el mismo espacio */
+    margin: 10px; /* Añade un poco de margen entre los bloques */
+}
+
+.hidden {
+    display: none; /* Esto asegura que los elementos con clase 'hidden' no se muestren */
+}
+
+
+img.imagen-icono-info {
+    width: 35px;
+    height: 35px;
+    cursor: pointer; 
+}
+
+/* Enhanced detection layout styles for aesthetic consistency */
+.detection-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff; /* Matching white background for content clarity */
+    border-radius: 8px; /* Softened corners for a modern look */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Space below the detection layout */
+}
+
+.detection-results {
+    flex: 1; /* Allocates half of the space */
+    margin-right: 20px; /* Space between the result and counts */
+}
+
+.detection-counts {
+    flex: 1; /* Allocates half of the space */
+    background-color: #f8f8f8; /* Slightly off-white background for distinction */
+    padding: 15px; /* Padding for internal spacing */
+    border-radius: 5px; /* Consistent rounded corners */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* Inset shadow for subtle depth */
+}
+
+.detection-image {
+    width: 100%; /* Ensures the image is responsive */
+    height: auto; /* Maintains the aspect ratio */
+    border-radius: 5px; /* Rounded corners for the image */
+}
+
+/* Styling text and list in detection counts for better readability */
+.detection-counts h3 {
+    color: #333; /* Dark grey for better readability */
+    margin-bottom: 10px; /* Space below the header */
+}
+
+.detection-counts ul {
+    list-style-type: none; /* Removes default list styling */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+}
+
+.detection-counts li {
+    background-color: #e6e6e6; /* Light grey background for list items */
+    padding: 8px 12px; /* Padding for list items */
+    margin-bottom: 6px; /* Space between list items */
+    border-radius: 4px; /* Rounded corners for list items */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    font-size: 16px; /* Slightly larger font size for readability */
+}
+
+
+
+<script>
+// Add 'dragover' class to upload area when dragging files over it
+function dragOverHandler(ev) {
+    ev.preventDefault();
+    document.getElementById('upload-area').classList.add('dragover');
+}
+
+// Remove 'dragover' class when no longer dragging files over upload area
+function dragLeaveHandler(ev) {
+    document.getElementById('upload-area').classList.remove('dragover');
+}
+
+// Your existing dropHandler function...
+</script>

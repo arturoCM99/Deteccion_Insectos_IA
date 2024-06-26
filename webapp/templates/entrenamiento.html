@@ -1,0 +1,136 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Página de Entrenamiento{% endblock %}
+
+{% block content %}
+<script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+
+<div class="container">
+       <div class="titulo-html">
+        <h1 class="titulo-subir-archivos">Entrena tu propio modelo</h1>
+            <a href="info">
+                <img class="imagen-icono-info" src="static/images/info-icon.png" alt="Información">
+            </a>
+    
+    </div>
+    
+    
+     <form id="trainingForm" method="post" action="{{ url_for('entrenamiento') }}">
+    
+    
+    <div class="form-group">
+        <label for="proporciones">Proporción de dataset:</label>
+        <input type="range" id="proporciones" name="proporciones" min="1" max="99" step="1" value="80" oninput="updateProporciones(this.value)">
+        <span id="proporcionesValue">Para entrenamiento: 80%</span><br>
+        <span id="testValue">Para test (restante): 20%</span>
+        <input type="hidden" id="proporcionesHidden" name="proporcionesValue" value="80">
+        <input type="hidden" id="testHidden" name="testValue" value="20">
+    </div>
+
+        <div class="form-group">
+            <label for="neuronas">Especifica el número de steps para la validación:</label>
+            <input type="number" id="neuronas" name="validacion" min="1">
+        </div>
+
+        
+        <div class="form-group">
+            <label for="algoritmo">Elige el algoritmo a utilizar:</label>
+            <select name="algoritmo" id="algoritmo">
+                <option value="SGD">SGD</option>
+                <option value="Adam">Adam</option>
+                <option value="RMSprop">RMSprop</option>
+            </select>
+        </div>
+    
+        
+        <div class="form-group">
+            <label for="modelo_resnet">Especifica el modelo ResNet:</label>
+            <select id="modelo_resnet" name="modelo_resnet">
+                <option value="resnet50">ResNet50</option>
+                <option value="resnet101">ResNet101</option>
+            </select>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="epoch">Especifica el número de epoch:</label>
+            <input type="number" id="epoch" name="epoch" min="1">
+        </div>
+        
+        <div class="form-group">
+            <label for="steps">Especifica el número de steps:</label>
+            <input type="number" id="steps" name="steps" min="1">
+        </div>
+
+        <div class="form-group">
+            <label for="Name">Especifica el nombre del archivo:</label>
+            <input type="text" id="Name" name="Name" required>
+        </div>
+     
+    <button id="start-training-btn" type="submit" class="btn btn-primary">Iniciar Entrenamiento</button>
+
+    </form>
+    <div class="training-container">
+        <div class="training-status">
+            <h2>Estado del Entrenamiento</h2>
+            <p id="loading-info" class="hidden">Mostrando resultados...</p>
+            <p id="epoch-info" class="hidden">Esperando datos de época...</p>
+            <p id="batch-info" class="hidden">Esperando datos de batch...</p>
+            <div id="download-link-area"></div>
+        </div>
+        <div class="training-data">
+            <h2>Datos del Entrenamiento</h2>
+                <p id="algorithm-info" class="hidden">Algoritmo: </p>
+                <p id="model-info" class="hidden">Modelo ResNet: </p>
+                <p id="filename-info" class="hidden">Nombre de archivo: </p>
+                <p id="training-prop-info" class="hidden">Proporción de entrenamiento: </p>
+                <p id="test-prop-info" class="hidden">Proporción de test: </p>
+                <p id="steps-info" class="hidden">Número de steps: </p>
+                <p id="validation-steps-info" class="hidden">Steps de validación: </p>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+document.getElementById('start-training-btn').addEventListener('click', function() {
+// Remueve la clase 'hidden' del elemento 'loading-info'
+    document.getElementById('loading-info').classList.remove('hidden');
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    function updateProporciones(value) {
+        document.getElementById('proporcionesValue').textContent = `Para entrenamiento: ${value}%`;
+        document.getElementById('testValue').textContent = `Para test (restante): ${100 - value}%`;
+        document.getElementById('proporcionesHidden').value = value;
+        document.getElementById('testHidden').value = 100 - value;
+    }
+
+    // Aseguramos que el slider tenga el evento 'oninput' correctamente asignado
+    var slider = document.getElementById('proporciones');
+    slider.oninput = function() {
+        updateProporciones(this.value);
+    };
+
+    // Inicializa los valores al cargar
+    updateProporciones(slider.value);
+});
+</script>
+
+
+
+{% endblock %}
+
+
+

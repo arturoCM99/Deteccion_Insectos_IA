@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="titulo-subir-archivos">¿Qué quieres hacer?</h1>
+  <div class="navigation">
+    <a href="{{ url_for('entrenamiento') }}" class="btn btn-primary btn-block">Entrenamiento</a>
+    <a href="{{ url_for('deteccion') }}" class="btn btn-secondary btn-block">Detección</a>
+  </div>
+</div>
+{% endblock %}
+
+
+
+

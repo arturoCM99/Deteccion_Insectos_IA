@@ -1,0 +1,6 @@
+*.h5
+# .idea/workspace.xml
+# Programacion_MaskRCNN/logs/
+# Programacion_MaskRCNN/weights/
+# webapp/
+

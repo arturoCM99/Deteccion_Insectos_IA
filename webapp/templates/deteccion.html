@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+{% block title %}Página de Detección{% endblock %}
+
+{% block content %}
+<h1 class="titulo-subir-archivos">Identifica cuántos y cuáles insectos hay</h1>
+<form id="detection-form" action="/deteccion" method="POST" enctype="multipart/form-data" target="_self">
+    <div class="upload-area" ondragover="dragOverHandler(event);" ondrop="dropHandler(event);">
+        <label for="fileInput">
+            <span id="file-prompt" class="file-prompt">Arrastra un archivo aquí o selecciona subiendo un archivo.</span>
+        </label>
+        <input type="file" id="fileInput" name="fileInput" accept="image/*" onchange="fileInputChangeHandler()">
+        <div class="image-preview-container"></div>
+    </div>
+    <br>
+    <select id="model-select" name="model-option" onchange="toggleModelUploadArea(event)">
+        <option value="default">Utilizar un modelo entrenado por defecto</option>
+        <option value="custom">Utilizar un modelo propio</option>
+    </select>
+    <br>
+    <div id="model-upload-area" class="upload-area" ondragover="modelDragOverHandler(event);" ondrop="modelDropHandler(event);">
+        <label for="modelInput" class="file-prompt">
+            <span id="model-prompt">Arrastra tu modelo aquí o selecciona subiendo un archivo.</span>
+        </label>
+        <input type="file" id="modelInput" name="modelInput" accept=".h5" onchange="modelFileInputChangeHandler()">
+        <div class="model-name-container"></div>
+    </div>
+    <br>
+    <button type="submit">Enviar</button>
+    <div class="detection-layout">
+        <!-- Resultado de la detección -->
+        <div class="detection-results">
+            <h2>Resultado de la detección</h2>
+            <img id="detection-image" src="{{ image_data }}" alt="Resultado de la detección" class="detection-image">
+        </div>
+    
+        <!-- Conteos de Detección -->
+        <div class="detection-counts">
+            <h3>Conteos de Detección:</h3>
+            <ul>
+                <li>Withe Fly (WF): {{ conteos[0] }}</li>
+                <li>Nesidicoris (NC): {{ conteos[1] }}</li>
+                <li>Macrolophis (MR): {{ conteos[2] }}</li>
+                <li>Total detectados: {{ conteos[3] }}</li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+<script>
+document.getElementById('detection-form').addEventListener('submit', function() {
+    document.getElementById('detection-image').classList.remove('hidden');
+});
+
+function dragOverHandler(ev) {
+    ev.preventDefault(); // Prevent default drag and drop behavior of the browser
+    ev.currentTarget.classList.add('dragover'); // Añadir la clase 'dragover'
+}
+
+function dragLeaveHandler(ev) {
+    ev.currentTarget.classList.remove('dragover'); // Quitar la clase 'dragover'
+}
+
+function dropHandler(ev) {
+    ev.preventDefault();
+    ev.currentTarget.classList.remove('dragover'); // Remove 'dragover' class
+    
+    var input = ev.currentTarget.querySelector('input[type="file"]');
+    var files = ev.dataTransfer.files;
+    
+    if (files.length > 0) {
+        input.files = files;
+        fileInputChangeHandler(); // Actualiza la vista previa de la imagen
+    }
+}
+
+function fileInputChangeHandler() {
+    var fileInput = document.getElementById('fileInput');
+    var imagePreviewContainer = document.querySelector('.image-preview-container');
+    var filePrompt = document.getElementById('file-prompt');
+
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            imagePreviewContainer.innerHTML = '';
+
+            var closeButton = document.createElement('button');
+            closeButton.classList.add('close-btn');
+            closeButton.innerHTML = '&times;';
+            closeButton.onclick = function() {
+                imagePreviewContainer.innerHTML = '';
+                fileInput.value = '';
+                filePrompt.style.display = 'block';
+            };
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '0';
+            closeButton.style.right = '0';
+
+            var selectedLabel = document.createElement('span');
+            selectedLabel.textContent = 'Imagen seleccionada:';
+            selectedLabel.classList.add('file-prompt');
+
+            var image = new Image();
+            image.src = e.target.result;
+            image.alt = 'Vista previa de la imagen cargada';
+            image.style.maxWidth = '200px';
+            image.style.maxHeight = '100px';
+            image.style.objectFit = 'contain';
+
+            imagePreviewContainer.appendChild(selectedLabel);
+            imagePreviewContainer.appendChild(image);
+            imagePreviewContainer.appendChild(closeButton);
+
+            filePrompt.style.display = 'none';
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+}
+
+function toggleModelUploadArea(event) {
+    var selection = event.target.value;
+    var modelUploadArea = document.getElementById('model-upload-area');
+    modelUploadArea.style.display = (selection === 'custom') ? 'flex' : 'none';
+}
+
+function modelDragOverHandler(ev) {
+    ev.preventDefault();
+    ev.currentTarget.classList.add('dragover');
+}
+
+function modelDropHandler(ev) {
+    ev.preventDefault();
+    ev.currentTarget.classList.remove('dragover');
+
+    var input = document.getElementById('modelInput');
+    var files = ev.dataTransfer.files;
+
+    if (files.length > 0) {
+        input.files = files; 
+        modelFileInputChangeHandler(); 
+    }
+}
+
+function modelFileInputChangeHandler() {
+    var input = document.getElementById('modelInput');
+    var modelLabel = input.parentElement.querySelector('label.file-prompt');
+    var modelNameContainer = document.querySelector('.model-name-container');
+
+    if (input.files && input.files[0]) {
+        var file = input.files[0];
+        modelNameContainer.innerHTML = '';
+
+        var closeButton = document.createElement('span');
+        closeButton.classList.add('close-btn');
+        closeButton.innerHTML = '&times;';
+        closeButton.style.position = 'absolute';
+        closeButton.style.top = '0';
+        closeButton.style.right = '0';
+        closeButton.onclick = function() {
+            input.value = '';
+            modelNameContainer.innerHTML = '';
+            modelLabel.style.display = 'block';
+        };
+
+        modelNameContainer.appendChild(closeButton);
+
+        var textSpan = document.createElement('span');
+        textSpan.textContent = 'Modelo seleccionado: ';
+        textSpan.classList.add('file-prompt');
+        
+        var fileNameSpan = document.createElement('span');
+        fileNameSpan.textContent = file.name;
+        fileNameSpan.classList.add('file-name');
+
+        modelNameContainer.appendChild(textSpan);
+        modelNameContainer.appendChild(fileNameSpan);
+
+        modelLabel.style.display = 'none';
+    }
+}
+
+window.onload = function() {
+    var filePrompts = document.querySelectorAll('.file-prompt');
+    filePrompts.forEach(function(prompt) {
+        prompt.addEventListener('click', function(event) {
+            event.stopPropagation();
+            var input = prompt.previousElementSibling;
+            input.click();
+        });
+    });
+
+    var uploadAreas = document.querySelectorAll('.upload-area');
+    uploadAreas.forEach(function(area) {
+        area.addEventListener('dragover', dragOverHandler);
+        area.addEventListener('dragleave', dragLeaveHandler);
+        area.addEventListener('drop', dropHandler);
+    });
+
+    document.getElementById('model-upload-area').style.display = 'none';
+    document.getElementById('model-select').addEventListener('change', toggleModelUploadArea);
+};
+</script>
+{% endblock %}
